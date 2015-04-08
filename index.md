@@ -7,14 +7,14 @@ hitheme: tomorrow
 knit        : slidify::knit2slides
 subtitle: Data Product Development
 framework: io2012
-widgets: ['polycharts']
+widgets: []
 ---
 
 ## Objectives
 
 1. Demonstrate the ability of using basic shiny app
 2. In Slide 1, reactive output display with isolate. GGplot2 is used. Temperature on Monthly basis is recorded.
-3. In Slide 2, rCharts integration for Wind Measurement on regular daily basis
+3. Slide 2 presents Wind Measurement on regular daily basis using scatter plot
 4. Data Source Interaction - airquality.
 
 ---
@@ -28,29 +28,30 @@ Temperature is remarkbly higher in middle of summer.
 
 This is the link to the shiny app: https://lalang.shinyapps.io/dataproduct/
 
----
+--- &twocol w1:40% w2:60%
 ## Wind Measurement classified by Day
-To plot the wind measurement on daily basis, we use rCharts
+*** =right
+![plot of chunk graph1](assets/fig/graph1-1.png) 
+*** =left
+- The variation of wind's velocity is generally low at the beginning of autumn. In contrast, summer's days have fluctuated pattern. 
+- Top windy day is around 15-17 in June.
+
+--- 
+
+## Wind Measurement classified by Day (cont)
+
+To plot the wind measurement on daily basis, we use ggplots2 and the avg line
 
 
 ```r
-library(UsingR)
-require(rCharts)
+require(ggplot2)
 require(knitr)
 data(airquality)
 
-p1 <- rPlot(Wind~Day, data=airquality, color="Month",type="point",size = list(const = 3))
-         p1$addParams(width = 600, height = 400, dom = 'chart1',
-                     title = " Wind Scatter Plot on regular daily basis")
-         p1$guides(x = list(title = "", min = 0,max = 32 ))
-         p1$guides(y = list(title = "", max = 22))
-         p1$save("p1.html",cdn=T)
+p1 <- ggplot(airquality, aes(Day, Wind, color = Month))+
+        geom_point()+
+        geom_line(stat = "hline", yintercept = "mean", aes(colour = Month))
 ```
-
----
-
-## Wind Measurement classified by Day (cont)
-<iframe src="p1.html", width=100%, height=600></iframe>
 This is the link to the shiny app: https://lalang.shinyapps.io/dataproduct/
 
 ---

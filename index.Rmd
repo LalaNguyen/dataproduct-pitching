@@ -32,8 +32,7 @@ This is the link to the shiny app: https://lalang.shinyapps.io/dataproduct/
 ## Wind Measurement classified by Day
 To plot the wind measurement on daily basis, we use rCharts
 
-
-```r
+```{r graph1, results='markup',echo=T, message=FALSE}
 library(UsingR)
 require(rCharts)
 require(knitr)
@@ -45,6 +44,7 @@ p1 <- rPlot(Wind~Day, data=airquality, color="Month",type="point",size = list(co
          p1$guides(x = list(title = "", min = 0,max = 32 ))
          p1$guides(y = list(title = "", max = 22))
          p1$save("p1.html",cdn=T)
+
 ```
 
 ---

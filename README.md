@@ -7,7 +7,7 @@ hitheme: tomorrow
 knit        : slidify::knit2slides
 subtitle: Data Product Development
 framework: io2012
-widgets: ['polycharts']
+widgets: []
 ---
 
 ## Objectives
@@ -32,7 +32,6 @@ This is the link to the shiny app: https://lalang.shinyapps.io/dataproduct/
 ## Wind Measurement classified by Day
 To plot the wind measurement on daily basis, we use rCharts
 
-
 ```r
 library(UsingR)
 require(rCharts)
@@ -44,13 +43,12 @@ p1 <- rPlot(Wind~Day, data=airquality, color="Month",type="point",size = list(co
                      title = " Wind Scatter Plot on regular daily basis")
          p1$guides(x = list(title = "", min = 0,max = 32 ))
          p1$guides(y = list(title = "", max = 22))
-         p1$save("p1.html",cdn=T)
 ```
 
 ---
 
-## Wind Measurement classified by Day (cont)
-<iframe src="p1.html", width=100%, height=600></iframe>
+## Wind Measurement classified by Day(cont)
+
 This is the link to the shiny app: https://lalang.shinyapps.io/dataproduct/
 
 ---
